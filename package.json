@@ -1,0 +1,23 @@
+{
+  "name": "kafka-playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jelisejev/kafka-playground.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jelisejev/kafka-playground/issues"
+  },
+  "homepage": "https://github.com/jelisejev/kafka-playground#readme",
+  "dependencies": {
+    "kafka-node": "5.0.0"
+  }
+}
