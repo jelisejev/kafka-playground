@@ -24,12 +24,13 @@ services:
     depends_on:
       - zookeeper
 
-  kafdrop:
-    image: obsidiandynamics/kafdrop
-    ports:
-      - 9000:9000
-    environment:
-      - KAFKA_BROKERCONNECT=host.docker.internal:9092
+#  kafdrop:
+#    image: obsidiandynamics/kafdrop
+#    ports:
+#      - 9000:9000
+#    network_mode: host
+#    environment:
+#      - KAFKA_BROKERCONNECT=localhost:9092
 
 volumes:
   zookeeper_data:
