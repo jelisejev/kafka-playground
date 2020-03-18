@@ -22,9 +22,12 @@ producer.on('ready', function () {
     console.log('Producer ready, listening to file messages');
     filesConsumer.on('message', (message) => {
         console.log(`new file: ${JSON.stringify(message)}`)
+
+        const data = require(`./data/${message.value}.json`);
+
         producer.send([{
             topic: 'transactions',
-            messages: ['message body']
+            messages: data.map(record => JSON.stringify(record))
         }], () => {})
     });
     filesConsumer.on('error', (message) => {
