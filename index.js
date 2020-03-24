@@ -3,7 +3,9 @@ const Consumer = kafka.Consumer;
 const filesClient = new kafka.KafkaClient({kafkaHost: 'localhost:9092'});
 const transactionClient = new kafka.KafkaClient({kafkaHost: 'localhost:9092'});
 
-const producer = new kafka.Producer(filesClient);
+const producer = new kafka.Producer(filesClient, {
+    partitionerType: 3,
+});
 
 const filesConsumer = new Consumer(
     filesClient,
@@ -25,10 +27,15 @@ producer.on('ready', function () {
 
         const data = require(`./data/${message.value}.json`);
 
-        producer.send([{
-            topic: 'transactions',
-            messages: data.map(record => JSON.stringify(record))
-        }], () => {})
+        producer.send(data.map(record => {
+            const key = record.id;
+
+            return {
+                topic: 'transactions',
+                messages: new kafka.KeyedMessage(key, JSON.stringify(record)),
+                key
+            }
+        }), () => {})
     });
     filesConsumer.on('error', (message) => {
         console.error(message);
