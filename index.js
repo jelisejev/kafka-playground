@@ -13,11 +13,12 @@ const filesConsumer = new Consumer(
         { topic: 'files' }
     ]);
 
-const transactionConsumer = new Consumer(
-    transactionClient,
-    [
-        { topic: 'transactions' }
-    ]);
+const transactionConsumer = new kafka.ConsumerGroup(
+    {
+        kafkaHost: 'localhost:9092',
+        groupId: 'transaction-consumer-group'
+    },
+    ['transactions', 'RebalanceTopic', 'RebalanceTest']);
 
 producer.on('ready', function () {
 
