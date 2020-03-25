@@ -18,7 +18,7 @@ const transactionConsumer = new kafka.ConsumerGroup(
         kafkaHost: 'localhost:9092',
         groupId: 'transaction-consumer-group'
     },
-    ['transactions', 'RebalanceTopic', 'RebalanceTest']);
+    ['transactions']);
 
 producer.on('ready', function () {
 
