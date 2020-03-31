@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "fileparser": "node fileparser.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,10 @@
   },
   "homepage": "https://github.com/jelisejev/kafka-playground#readme",
   "dependencies": {
-    "kafka-node": "5.0.0"
+    "kafka-node": "5.0.0",
+    "kafkajs": "1.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.2"
   }
 }
