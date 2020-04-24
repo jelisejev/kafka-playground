@@ -32,6 +32,13 @@ services:
     volumes:
       - kafka_data:/home/kafka
 
+  kafkadrop:
+    image: obsidiandynamics/kafdrop
+    ports:
+      - 9000:9000
+    environment:
+      - KAFKA_BROKERCONNECT=kafka:29092
+
 volumes:
   kafka_data:
     driver: local
