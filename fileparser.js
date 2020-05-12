@@ -14,7 +14,9 @@ const run = async () => {
     await consumer.subscribe({ topic: 'files' });
 
     await consumer.run({
-        eachMessage: async ({ message }) => {
+        autoCommit: false,
+        eachMessage: async ({ topic, partition, message }) => {
+            console.log(`read from topic ${topic}, partition ${partition}`);
             console.log(`new file: ${JSON.stringify(message)}`);
 
             const data = require(`./data/${message.value}.json`);
@@ -28,6 +30,15 @@ const run = async () => {
                     key: record.id,
                 })
             }));
+
+            const offset = {
+                topic,
+                partition,
+                offset: String(Number(message.offset) + 1),
+            };
+            console.log(`comitting offset: ${JSON.stringify(offset)}`);
+            await consumer.commitOffsets([offset])
+            console.log(`done`);
         },
     })
 };

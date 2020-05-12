@@ -1,0 +1,6 @@
+FROM confluentinc/cp-kafka:5.5.0
+
+ENV KAFKA_CONFLUENT_SUPPORT_METRICS_ENABLE 0
+
+ENV KAFKA_LOG_DIRS /home/kafka/data
+
